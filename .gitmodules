@@ -1,0 +1,3 @@
+[submodule "deps/cpp-EventEmitter"]
+	path = deps/cpp-EventEmitter
+	url = https://github.com/Rush/cpp-EventEmitter.git
