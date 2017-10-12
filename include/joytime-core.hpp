@@ -124,7 +124,7 @@ namespace Joytime {
   typedef std::vector<uint8_t> (ReceiveBufferFunction)(void*, int);
   typedef void (CTransmitBufferFunction)(void*, uint8_t*, int);
   typedef uint8_t* (CReceiveBufferFunction)(void*, int, int*);
-  JOYTIME_CORE_EXPORT class Rumble {
+  class JOYTIME_CORE_EXPORT Rumble {
     public:
       uint16_t highFrequency;
       uint8_t highAmplitude;
@@ -140,7 +140,7 @@ namespace Joytime {
       static uint8_t amplitudeToHA(double amplitude);
       static uint16_t amplitudeToLA(double amplitude);
   };
-  JOYTIME_CORE_EXPORT class Controller {
+  class JOYTIME_CORE_EXPORT Controller {
     private:
       TransmitBufferFunction* transmitBuffer = nullptr;
       ReceiveBufferFunction* receiveBuffer = nullptr;
