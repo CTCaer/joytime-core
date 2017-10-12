@@ -1,5 +1,5 @@
 #include "joytime-core.hpp"
-#include "joytime_core_EXPORTS.hpp"
+#include "joytime_core_EXPORTS.h"
 
 namespace Joytime {
   JOYTIME_CORE_EXPORT Joytime::Rumble neutralRumble = Joytime::Rumble(320.0, 0.0, 160.0, 0.0);

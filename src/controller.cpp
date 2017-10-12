@@ -5,7 +5,7 @@
 #include <exception>
 
 Joytime::Controller::Controller():
-  initialize(false) {};
+  initializable(false) {};
 
 Joytime::Controller::Controller(const Joytime::Controller& controller):
   transmitBuffer(controller.transmitBuffer),

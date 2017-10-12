@@ -198,11 +198,11 @@ JOYTIME_CORE_EXPORT Joytime_Stick* Joytime_Controller_getRightStick(Joytime_Cont
   Joytime::Controller* controller = (Joytime::Controller*)_controller;
   return (Joytime_Stick*)(&(controller->rightStick));
 };
-JOYTIME_CORE_EXPORT Joytime_SixAxis* Joytime_Controller_getAccelerometer(Joytime_Controller* controller) {
+JOYTIME_CORE_EXPORT Joytime_SixAxis* Joytime_Controller_getAccelerometer(Joytime_Controller* _controller) {
   Joytime::Controller* controller = (Joytime::Controller*)_controller;
   return (Joytime_SixAxis*)(&(controller->accelerometer));
 };
-JOYTIME_CORE_EXPORT Joytime_SixAxis* Joytime_Controller_getGyroscope(Joytime_Controller* controller) {
+JOYTIME_CORE_EXPORT Joytime_SixAxis* Joytime_Controller_getGyroscope(Joytime_Controller* _controller) {
   Joytime::Controller* controller = (Joytime::Controller*)_controller;
   return (Joytime_SixAxis*)(&(controller->gyroscope));
 };
