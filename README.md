@@ -14,7 +14,7 @@ and gyroscope/accelerometer data has not been tested.
 
 ## Getting Started
 
-The project is managed via CMake, so it should be pretty easy to get it to compile. Clone it, and in the folder, do:
+The project is managed via CMake, so it should be pretty easy to get it to compile. Clone it (with `git clone --recursive https://github.com/switch-joytime/jyotime-core`), and in the folder, do:
 ```bash
 mkdir build
 cd build
