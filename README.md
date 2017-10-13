@@ -22,7 +22,7 @@ cmake ..
 cmake --build .
 ```
 
-~~Now, to actually use the library, you'll want to checkout the [docs](docs/api.md).~~ TODO. For now, just checkout the header (`joytime-core.h` for C, `joytime-core.hpp` for C++) and try to do something with it.
+~~Now, to actually use the library, you'll want to checkout the [docs](docs/api.md).~~ TODO. For now, just checkout the header (`joytime-core.h` for C, `joytime-core.hpp` for C++) and try to do something with it. Also, you can checkout [the demo](https://github.com/switch-joytime/joytime-demo) for a quick overview of a program using Joytime.
 
 ## Input Libraries
 
