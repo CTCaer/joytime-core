@@ -45,4 +45,4 @@ target_compile_definitions(joytime-core_static PUBLIC JOYTIME_CORE_BUILT_AS_STAT
 if (NOT MSVC)
   target_compile_options(joytime-core PRIVATE "-Wno-c++11-narrowing")
   target_compile_options(joytime-core_static PRIVATE "-Wno-c++11-narrowing")
-endif (MSVC)
+endif (NOT MSVC)
