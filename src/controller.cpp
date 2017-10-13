@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <exception>
+#include <string>
 
 Joytime::Controller::Controller():
   initializable(false) {};
@@ -150,7 +151,7 @@ void Joytime::Controller::initialize(bool calibrate) {
         (leftStickCalibrationBuf[2] << 4) | (leftStickCalibrationBuf[1] >> 4),
         (leftStickCalibrationBuf[4] << 8) & 0xf00 | leftStickCalibrationBuf[3],
         (leftStickCalibrationBuf[5] << 4) | (leftStickCalibrationBuf[4] >> 4),
-        (leftStickCalibrationBuf[7] << 8) & 0xff | leftStickCalibrationBuf[6],
+        (leftStickCalibrationBuf[7] << 8) & 0xf00 | leftStickCalibrationBuf[6],
         (leftStickCalibrationBuf[8] << 4) | (leftStickCalibrationBuf[7] >> 4)
       };
 

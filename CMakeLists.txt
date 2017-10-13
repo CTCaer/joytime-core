@@ -41,3 +41,8 @@ target_include_directories(joytime-core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/incl
 target_include_directories(joytime-core_static PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 
 target_compile_definitions(joytime-core_static PUBLIC JOYTIME_CORE_BUILT_AS_STATIC=1)
+
+if (NOT MSVC)
+  target_compile_options(joytime-core PRIVATE "-Wno-c++11-narrowing")
+  target_compile_options(joytime-core_static PRIVATE "-Wno-c++11-narrowing")
+endif (MSVC)
