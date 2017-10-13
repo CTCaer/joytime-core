@@ -3,7 +3,6 @@
 #include <iostream>
 #include <vector>
 #include <exception>
-#include <string>
 
 Joytime::Controller::Controller():
   initializable(false) {};
@@ -36,7 +35,7 @@ void Joytime::Controller::_transmitBuffer(std::vector<uint8_t> buffer) {
   } else if (transmitBufferC != nullptr) {
     transmitBufferC(handle, buffer.data(), buffer.size());
   } else {
-    throw std::exception("Could not send command: no transmission function is set.");
+    throw std::runtime_error("Could not send command: no transmission function is set.");
   }
 };
 
@@ -57,7 +56,7 @@ std::vector<uint8_t> Joytime::Controller::_receiveResponse() {
       }
     }
   } else {
-    throw std::exception("Could not send command: no receive function is set.");
+    throw std::runtime_error("Could not send command: no receive function is set.");
   }
 
   return response;
@@ -129,7 +128,7 @@ std::vector<uint8_t> Joytime::Controller::readSPIFlash(int32_t address, uint8_t 
 };
 
 void Joytime::Controller::initialize(bool calibrate) {
-  if (!initializable) throw std::exception("This Controller cannot be initialized");
+  if (!initializable) throw std::runtime_error("This Controller cannot be initialized");
 
   usable = true;
 
@@ -246,7 +245,7 @@ void Joytime::Controller::initialize(bool calibrate) {
 };
 
 void Joytime::Controller::performUsabilityCheck() {
-  if (!usable) throw std::exception("This Controller cannot be used (yet)");
+  if (!usable) throw std::runtime_error("This Controller cannot be used (yet)");
 }
 
 void Joytime::Controller::setInputReportMode(Joytime::ControllerInputReportMode reportMode = Joytime::ControllerInputReportMode::StandardReport) {
