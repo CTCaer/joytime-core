@@ -12,17 +12,25 @@ compile and work on other platforms, though. If anyone would like to be a guinea
 pig and test it, go right ahead! It'd be great to get some feedback. However, stick
 and gyroscope/accelerometer data has not been tested.
 
+By the way, this project would've been impossible without the great work of everyone who contributed
+to reverse engineering the JoyCons' communication protocols over at [Nintendo Switch Reverse Engineering](https://github.com/dekuNukem/Nintendo_Switch_Reverse_Engineering). Thanks guys! :+1:
+
 ## Getting Started
 
-The project is managed via CMake, so it should be pretty easy to get it to compile. Clone it (with `git clone --recursive https://github.com/switch-joytime/jyotime-core`), and in the folder, do:
+You'll probably want to head on over to [The Docs](docs/README.md) (and probably
+the [Getting Started Guide](docs/getting-started/README.md)). You can also checkout
+[the demo](https://github.com/switch-joytime/joytime-demo) for a quick overview of
+a program using Joytime.
+
+## Building
+
+The project is managed via CMake, so it should be pretty easy to get it to compile. Clone it (with `git clone --recursive https://github.com/switch-joytime/joytime-core`), and in the folder, do:
 ```bash
 mkdir build
 cd build
 cmake ..
 cmake --build .
 ```
-
-~~Now, to actually use the library, you'll want to checkout the [docs](docs/api.md).~~ TODO. For now, just checkout the header (`joytime-core.h` for C, `joytime-core.hpp` for C++) and try to do something with it. Also, you can checkout [the demo](https://github.com/switch-joytime/joytime-demo) for a quick overview of a program using Joytime.
 
 ## Input Libraries
 

@@ -21,8 +21,8 @@ typedef enum _Joytime_ControllerType {
 } Joytime_ControllerType;
 typedef enum _Joytime_ControllerInputReportMode {
   Mode_IRCamera = 0x00,
-  Mode__SpecialIR = 0x02,
-  Mode__MCUUpdateState = 0x20,
+  Mode_SpecialIR = 0x02,
+  Mode_MCUUpdateState = 0x20,
   Mode_StandardReport = 0x30,
   Mode_NFCAndIR = 0x31,
   Mode_SimpleHID = 0x3f,

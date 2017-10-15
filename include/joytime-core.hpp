@@ -33,8 +33,8 @@ namespace Joytime {
   };
   enum class ControllerInputReportMode: uint8_t {
     IRCamera = 0x00,
-    _SpecialIR = 0x02,
-    _MCUUpdateState = 0x20,
+    SpecialIR_ = 0x02,
+    MCUUpdateState_ = 0x20,
     StandardReport = 0x30,
     NFCAndIR = 0x31,
     SimpleHID = 0x3f,
@@ -130,11 +130,13 @@ namespace Joytime {
       uint8_t highAmplitude;
       uint8_t lowFrequency;
       uint16_t lowAmplitude;
+
       Rumble(double frequency, double amplitude);
       Rumble(double highFrequency, double highAmplitude, double lowFrequency, double lowAmplitude);
       Rumble(uint16_t highFrequency, uint8_t highAmplitude, uint8_t lowFrequency, uint16_t lowAmplitude);
       uint8_t* toBuffer();
       std::vector<uint8_t> toVector();
+
       static uint16_t frequencyToHF(double frequency);
       static uint8_t frequencyToLF(double frequency);
       static uint8_t amplitudeToHA(double amplitude);
@@ -155,8 +157,8 @@ namespace Joytime {
 
       void performUsabilityCheck();
       void update(std::vector<uint8_t> buf);
-      void _transmitBuffer(std::vector<uint8_t> buffer);
-      std::vector<uint8_t> _receiveResponse();
+      void transmitBuffer_(std::vector<uint8_t> buffer);
+      std::vector<uint8_t> receiveResponse_();
       std::vector<uint8_t> sendCommand(Joytime::ControllerCommand command, std::vector<uint8_t> buf);
       std::vector<uint8_t> sendSubcommand(Joytime::ControllerCommand command, Joytime::ControllerSubcommand subcommand, std::vector<uint8_t> buf);
     public:

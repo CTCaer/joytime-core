@@ -1,13 +1,6 @@
 #include "joytime-core.hpp"
 #include <cmath>
-
-// clamps a number to make sure it doesn't exceed either boundary
-double clamp(double n, double min, double max) {
-  // we could just do it all on one line, but readability ftw
-  if (n < min) return min;
-  if (n > max) return max;
-  return n;
-};
+#include <algorithm>
 
 double encodeFrequency(double frequency) {
   return round(log2(frequency / 10.0) * 32.0);
@@ -64,24 +57,26 @@ std::vector<uint8_t> Joytime::Rumble::toVector() {
 };
 
 uint16_t Joytime::Rumble::frequencyToHF(double frequency) {
-  frequency = clamp(frequency, 0.0, 1253.0);
+  frequency = std::clamp(frequency, 0.0, 1253.0);
 
   return (encodeFrequency(frequency) - 0x60) * 4;
 };
 
 uint8_t Joytime::Rumble::frequencyToLF(double frequency) {
-  frequency = clamp(frequency, 0.0, 1253.0);
+  frequency = std::clamp(frequency, 0.0, 1253.0);
 
   return (encodeFrequency(frequency) * 32.0) - 0x40;
 };
 
 uint8_t Joytime::Rumble::amplitudeToHA(double amplitude) {
-  amplitude = clamp(amplitude, 0.0, 1.8);
+  amplitude = std::clamp(amplitude, 0.0, 1.8);
 
   return encodeAmplitude(amplitude);
 };
 
 uint16_t Joytime::Rumble::amplitudeToLA(double amplitude) {
+  amplitude = std::clamp(amplitude, 0.0, 1.8);
+  
   uint8_t encoded = encodeAmplitude(amplitude);
   uint8_t evenOrOdd = encoded % 2;
 

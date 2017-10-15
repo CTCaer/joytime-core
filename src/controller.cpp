@@ -29,7 +29,7 @@ Joytime::Controller::Controller(Joytime::ControllerType _type, void* _handle, Jo
   type(_type),
   handle(_handle) {};
 
-void Joytime::Controller::_transmitBuffer(std::vector<uint8_t> buffer) {
+void Joytime::Controller::transmitBuffer_(std::vector<uint8_t> buffer) {
   if (transmitBuffer != nullptr) {
     transmitBuffer(handle, buffer);
   } else if (transmitBufferC != nullptr) {
@@ -39,7 +39,7 @@ void Joytime::Controller::_transmitBuffer(std::vector<uint8_t> buffer) {
   }
 };
 
-std::vector<uint8_t> Joytime::Controller::_receiveResponse() {
+std::vector<uint8_t> Joytime::Controller::receiveResponse_() {
   std::vector<uint8_t> response;
 
   if (receiveBuffer != nullptr) {
@@ -68,11 +68,11 @@ std::vector<uint8_t> Joytime::Controller::sendCommand(Joytime::ControllerCommand
   buf.push_back((uint8_t)command);
   buf.insert(buf.begin() + 1, buffer.begin(), buffer.end());
 
-  _transmitBuffer(buf);
+  transmitBuffer_(buf);
 
   // read until a reply is received
   std::vector<uint8_t> reply;
-  while ((reply = _receiveResponse()), reply.size() < 1);
+  while ((reply = receiveResponse_()), reply.size() < 1);
 
   return reply;
 };
@@ -93,12 +93,12 @@ std::vector<uint8_t> Joytime::Controller::sendSubcommand(Joytime::ControllerComm
 
   buf.insert(buf.begin() + 11, buffer.begin(), buffer.end());
 
-  _transmitBuffer(buf);
+  transmitBuffer_(buf);
 
   // read until the *correct subcommand reply* is received
   std::vector<uint8_t> reply;
   while (true) {
-    reply = _receiveResponse();
+    reply = receiveResponse_();
     if (reply.size() < 1) continue;
     if (reply[0] != (uint8_t)Joytime::ControllerReportCode::SubcommandReply) continue;
     if (reply[14] != (uint8_t)subcommand) continue;
@@ -146,26 +146,26 @@ void Joytime::Controller::initialize(bool calibrate) {
 
     if (leftStickCalibrationBuf.size() >= 0x09) {
       uint16_t leftStickData[6] = {
-        (leftStickCalibrationBuf[1] << 8) & 0xf00 | leftStickCalibrationBuf[0],
+        ((leftStickCalibrationBuf[1] << 8) & 0xf00) | leftStickCalibrationBuf[0],
         (leftStickCalibrationBuf[2] << 4) | (leftStickCalibrationBuf[1] >> 4),
-        (leftStickCalibrationBuf[4] << 8) & 0xf00 | leftStickCalibrationBuf[3],
+        ((leftStickCalibrationBuf[4] << 8) & 0xf00) | leftStickCalibrationBuf[3],
         (leftStickCalibrationBuf[5] << 4) | (leftStickCalibrationBuf[4] >> 4),
-        (leftStickCalibrationBuf[7] << 8) & 0xf00 | leftStickCalibrationBuf[6],
+        ((leftStickCalibrationBuf[7] << 8) & 0xf00) | leftStickCalibrationBuf[6],
         (leftStickCalibrationBuf[8] << 4) | (leftStickCalibrationBuf[7] >> 4)
       };
 
       uint16_t leftStickParameters[12] = {
-        (stickParameters1Buf[1] << 8) & 0xf00 | stickParameters1Buf[0],
+        ((stickParameters1Buf[1] << 8) & 0xf00) | stickParameters1Buf[0],
         (stickParameters1Buf[2] << 4) | (stickParameters1Buf[1] >> 4),
-        (stickParameters1Buf[4] << 8) & 0xf00 | stickParameters1Buf[3],
+        ((stickParameters1Buf[4] << 8) & 0xf00) | stickParameters1Buf[3],
         (stickParameters1Buf[5] << 4) | (stickParameters1Buf[4] >> 4),
-        (stickParameters1Buf[7] << 8) & 0xf00 | stickParameters1Buf[6],
+        ((stickParameters1Buf[7] << 8) & 0xf00) | stickParameters1Buf[6],
         (stickParameters1Buf[8] << 4) | (stickParameters1Buf[7] >> 4),
-        (stickParameters1Buf[10] << 8) & 0xf00 | stickParameters1Buf[9],
+        ((stickParameters1Buf[10] << 8) & 0xf00) | stickParameters1Buf[9],
         (stickParameters1Buf[11] << 4) | (stickParameters1Buf[10] >> 4),
-        (stickParameters1Buf[13] << 8) & 0xf00 | stickParameters1Buf[12],
+        ((stickParameters1Buf[13] << 8) & 0xf00) | stickParameters1Buf[12],
         (stickParameters1Buf[14] << 4) | (stickParameters1Buf[13] >> 4),
-        (stickParameters1Buf[16] << 8) & 0xf00 | stickParameters1Buf[15],
+        ((stickParameters1Buf[16] << 8) & 0xf00) | stickParameters1Buf[15],
         (stickParameters1Buf[17] << 4) | (stickParameters1Buf[16] >> 4),
       };
 
@@ -181,26 +181,26 @@ void Joytime::Controller::initialize(bool calibrate) {
 
     if (rightStickCalibrationBuf.size() >= 0x09) {
       uint16_t rightStickData[6] = {
-        (rightStickCalibrationBuf[1] << 8) & 0xf00 | rightStickCalibrationBuf[0],
+        ((rightStickCalibrationBuf[1] << 8) & 0xf00) | rightStickCalibrationBuf[0],
         (rightStickCalibrationBuf[2] << 4) | (rightStickCalibrationBuf[1] >> 4),
-        (rightStickCalibrationBuf[4] << 8) & 0xf00 | rightStickCalibrationBuf[3],
+        ((rightStickCalibrationBuf[4] << 8) & 0xf00) | rightStickCalibrationBuf[3],
         (rightStickCalibrationBuf[5] << 4) | (rightStickCalibrationBuf[4] >> 4),
-        (rightStickCalibrationBuf[7] << 8) & 0xff | rightStickCalibrationBuf[6],
+        ((rightStickCalibrationBuf[7] << 8) & 0xf00) | rightStickCalibrationBuf[6],
         (rightStickCalibrationBuf[8] << 4) | (rightStickCalibrationBuf[7] >> 4)
       };
 
       uint16_t rightStickParameters[12] = {
-        (stickParameters2Buf[1] << 8) & 0xf00 | stickParameters2Buf[0],
+        ((stickParameters2Buf[1] << 8) & 0xf00) | stickParameters2Buf[0],
         (stickParameters2Buf[2] << 4) | (stickParameters2Buf[1] >> 4),
-        (stickParameters2Buf[4] << 8) & 0xf00 | stickParameters2Buf[3],
+        ((stickParameters2Buf[4] << 8) & 0xf00) | stickParameters2Buf[3],
         (stickParameters2Buf[5] << 4) | (stickParameters2Buf[4] >> 4),
-        (stickParameters2Buf[7] << 8) & 0xf00 | stickParameters2Buf[6],
+        ((stickParameters2Buf[7] << 8) & 0xf00) | stickParameters2Buf[6],
         (stickParameters2Buf[8] << 4) | (stickParameters2Buf[7] >> 4),
-        (stickParameters2Buf[10] << 8) & 0xf00 | stickParameters2Buf[9],
+        ((stickParameters2Buf[10] << 8) & 0xf00) | stickParameters2Buf[9],
         (stickParameters2Buf[11] << 4) | (stickParameters2Buf[10] >> 4),
-        (stickParameters2Buf[13] << 8) & 0xf00 | stickParameters2Buf[12],
+        ((stickParameters2Buf[13] << 8) & 0xf00) | stickParameters2Buf[12],
         (stickParameters2Buf[14] << 4) | (stickParameters2Buf[13] >> 4),
-        (stickParameters2Buf[16] << 8) & 0xf00 | stickParameters2Buf[15],
+        ((stickParameters2Buf[16] << 8) & 0xf00) | stickParameters2Buf[15],
         (stickParameters2Buf[17] << 4) | (stickParameters2Buf[16] >> 4),
       };
 
