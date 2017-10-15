@@ -31,7 +31,7 @@ it (we say *try* because it might not find any controllers).
 
 ```c
 int controllersFound = 0;
-Joytime::Controller** controllers = Joytime_scanForControllers(&controllersFound);
+Joytime_Controller** controllers = Joytime_scanForControllers(&controllersFound);
 ```
 
 However, what if we'd like to keep searching until we find some controllers?
